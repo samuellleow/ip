@@ -2,28 +2,35 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
         String greetings = "    ____________________________________________________________\n" +
                 "     Hello! I'm Duke\n" +
                 "     What can I do for you?\n" +
                 "    ____________________________________________________________\n" +
                 "\n";
         String output;
+        String input[] = new String[100];
+        int i = 0;
         System.out.println(greetings);
         Scanner in = new Scanner(System.in);
-        String input = in.nextLine();
+        String currentInput = in.nextLine();
 
-        while (!input.equals("bye")){
-            output = "    ____________________________________________________________\n" +
-                    "     " + input + "\n" +
-                    "    ____________________________________________________________\n";
-            System.out.println(output);
-            input = in.nextLine();
+        while (!currentInput.equals("bye")){
+            if(currentInput.equals("list")) {
+                System.out.println("    ____________________________________________________________\n");
+                for (int m = 0; m < i; m++) {
+                    System.out.println("     " + (m+1) + ". " + input[m]);
+                }
+                System.out.println("    ____________________________________________________________\n");
+            }
+            else {
+                input[i] = currentInput;
+                output = "    ____________________________________________________________\n" +
+                        "     added: " + input[i] + "\n" +
+                        "    ____________________________________________________________\n";
+                System.out.println(output);
+                i++;
+            }
+            currentInput = in.nextLine();
         }
 
         output = "    ____________________________________________________________\n" +
