@@ -1,10 +1,12 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected static int noOfTask;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        noOfTask++;
     }
 
     public String getStatusIcon() {
@@ -15,4 +17,19 @@ public class Task {
         this.isDone = true;
         //System.out.println(this + "Done");
     }
+
+    public String getTaskType() {
+        return null;
+    }
+
+    public static int getNoOfTask() {
+        return noOfTask;
+    }
+
+    @Override
+    public String toString() {
+        return description;
+    }
+
+
 }
