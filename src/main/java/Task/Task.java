@@ -1,3 +1,5 @@
+package Task;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -16,6 +18,10 @@ public class Task {
     public void taskDone(){
         this.isDone = true;
         //System.out.println(this + "Done");
+    }
+
+    public String getTaskDescription() {
+        return description;
     }
 
     public String getTaskType() {

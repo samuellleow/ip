@@ -1,4 +1,8 @@
 import java.util.Scanner;
+import Task.Deadline;
+import Task.ToDo;
+import Task.Events;
+import Task.Task;
 
 public class Duke {
 
@@ -25,7 +29,7 @@ public class Duke {
         String taskDoneDescription = "";
         for(int i = 0; i < Task.getNoOfTask(); i++) {
             if(itemIndex == i) {
-                taskDoneDescription = t[i].description;
+                taskDoneDescription = t[i].getTaskDescription();
                 t[i].taskDone();
             }
         }
