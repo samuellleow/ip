@@ -17,7 +17,6 @@ public class Task {
 
     public void taskDone(){
         this.isDone = true;
-        //System.out.println(this + "Done");
     }
 
     public String getTaskDescription() {

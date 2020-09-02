@@ -7,7 +7,6 @@ import Task.Task;
 public class Duke {
 
     static Task[] t = new Task[100];
-    static String output;
     static Scanner in = new Scanner(System.in);
 
     public static void displayTaskList() {
@@ -41,7 +40,14 @@ public class Duke {
 
     public static void addTask(String currentInput) {
         String taskType = currentInput.split(" ")[0];
-        String taskDescription = currentInput.split(" /", 2)[0].split(" ", 2)[1];
+        String taskDescription;
+
+        if(currentInput.split(" ").length > 1) {
+            taskDescription = currentInput.split(" /", 2)[0].split(" ", 2)[1];
+        }
+        else {
+            taskDescription = currentInput;
+        }
 
         switch (taskType) {
         case "deadline":
@@ -49,8 +55,8 @@ public class Duke {
             t[Task.getNoOfTask()] = new Deadline(taskDescription, deadlineBy);
             break;
         case "event":
-            String eventBy = currentInput.split("/at ")[1];
-            t[Task.getNoOfTask()] = new Events(taskDescription, eventBy);
+            String eventAt = currentInput.split("/at ")[1];
+            t[Task.getNoOfTask()] = new Events(taskDescription, eventAt);
             break;
         case "todo":
             t[Task.getNoOfTask()] = new ToDo(taskDescription);
@@ -59,12 +65,11 @@ public class Duke {
             t[Task.getNoOfTask()] = new ToDo(currentInput);
             break;
         }
-        output = "    ____________________________________________________________\n" +
+        System.out.println("    ____________________________________________________________\n" +
                 "     Got it. I've added this task:\n" +
                 "       " + t[Task.getNoOfTask()-1] + "\n" +
                 "     Now you have " + (Task.getNoOfTask()) + " tasks in the list.\n" +
-                "    ____________________________________________________________\n";
-        System.out.println(output);
+                "    ____________________________________________________________\n");
     }
 
     public static void main(String[] args) {
@@ -75,6 +80,7 @@ public class Duke {
                 "\n";
         System.out.println(greetings);
 
+        String output;
         String currentInput = in.nextLine();
 
         while (!currentInput.equals("bye")) {
