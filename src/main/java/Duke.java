@@ -31,21 +31,28 @@ public class Duke {
         }
     }
 
-    public static void taskMarkAsDone(int itemIndex) {
-        String taskDoneDescription = "";
-        for (int i = 0; i < Task.getNoOfTask(); i++) {
-            if (itemIndex == i) {
-                taskDoneDescription = t[i].getTaskDescription();
-                t[i].taskDone();
-            }
-        }
+    public static void taskMarkAsDone(String currentInput) {
+        String taskDoneDescription;
+        int itemIndex = Integer.parseInt(currentInput.replaceAll("\\D+","")) - 1;
+        taskDoneDescription = t[itemIndex].getTaskDescription();
+        t[itemIndex].taskDone();
         System.out.println("    ____________________________________________________________\n" +
                 "     Nice! I've marked this task as done:\n" +
                 "       [✓] " + taskDoneDescription + "\n" +
                 "    ____________________________________________________________\n");
     }
 
-    public static void addTask(String currentInput) {
+    public static void errorCheckingTaskDone(String currentInput) {
+        try {
+            taskMarkAsDone(currentInput);
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException | NullPointerException e) {
+            System.out.println("    ____________________________________________________________\n" +
+                    "     Please input a valid task number!!\n" +
+                    "    ____________________________________________________________\n");
+        }
+    }
+
+    public static void checkTask(String currentInput) {
         String taskType = currentInput.split(" ")[0];
         String taskDescription;
 
@@ -65,6 +72,9 @@ public class Duke {
             break;
         case "todo":
             createTodoTask(taskDescription);
+            break;
+        case "done":
+            errorCheckingTaskDone(currentInput);
             break;
         default:
             invalidTaskInput();
@@ -145,11 +155,8 @@ public class Duke {
         while (!currentInput.equals("bye")) {
             if (currentInput.equals("list")) {
                 displayTaskList();
-            } else if (currentInput.contains("done")) {
-                int itemIndex = Integer.parseInt(currentInput.replaceAll("\\D+","")) - 1;
-                taskMarkAsDone(itemIndex);
             } else {
-                addTask(currentInput);
+                checkTask(currentInput);
             }
             currentInput = in.nextLine();
         }

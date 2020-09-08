@@ -3,7 +3,7 @@ package Task;
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected static int noOfTask;
+    protected static int noOfTask = 0;
 
     public Task(String description) {
         this.description = description;
