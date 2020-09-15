@@ -12,6 +12,11 @@ public class Events extends Task {
     }
 
     @Override
+    public String getTimeline() {
+        return this.at;
+    }
+
+    @Override
     public String getTaskType() {
         return taskType;
     }

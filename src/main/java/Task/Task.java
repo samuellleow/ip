@@ -23,12 +23,20 @@ public class Task {
         return description;
     }
 
+    public String getTimeline() {
+        return null;
+    }
+
     public String getTaskType() {
         return null;
     }
 
     public static int getNoOfTask() {
         return noOfTask;
+    }
+
+    public boolean getTaskStatus() {
+        return isDone;
     }
 
     @Override
