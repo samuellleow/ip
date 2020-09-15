@@ -6,6 +6,11 @@ import Task.Task;
 import Task.DukeException;
 import java.util.ArrayList;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Duke {
 
     static ArrayList<Task> t = new ArrayList<>();
@@ -182,6 +187,97 @@ public class Duke {
                 "    ____________________________________________________________\n");
     }
 
+    private static String loadExistingList(Task[] t) {
+        checkSpecificFolderExist();
+        String dataListFilePath = "data/duke.txt";
+        try {
+            File dataListFile = checkFileExists(dataListFilePath);
+            readDataList(t, dataListFile);
+        } catch (IOException e) {
+            System.out.println("IOException error has occurred");
+        }
+        return dataListFilePath;
+    }
+
+    private static void checkSpecificFolderExist() {
+        File folder = new File("data/");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+    }
+
+    private static File checkFileExists(String dataListFilePath) throws IOException {
+        File dataFile = new File(dataListFilePath);
+        if (!dataFile.exists()) {
+            dataFile.createNewFile();
+        }
+        return dataFile;
+    }
+
+    private static void readDataList(Task[] t, File dataListFile) throws FileNotFoundException {
+        Scanner fileScanner = new Scanner(dataListFile);
+        while (fileScanner.hasNextLine()) {
+            String currentLine = fileScanner.nextLine();
+            String taskType = currentLine.split(" \\| ")[0];
+            String taskDescription = currentLine.split(" \\| ")[2];
+            String isTaskDone = currentLine.split(" \\| ")[1];
+            switch (taskType) {
+            case "T":
+                t[Task.getNoOfTask()] = new ToDo(taskDescription);
+                if (isTaskDone.equals("1")) {
+                    t[Task.getNoOfTask()-1].taskDone();
+                }
+                break;
+            case "D":
+                String deadlineBy = currentLine.split(" \\| ")[3];
+                t[Task.getNoOfTask()] = new Deadline(taskDescription, deadlineBy);
+                if (isTaskDone.equals("1")) {
+                    t[Task.getNoOfTask()-1].taskDone();
+                }
+                break;
+            case "E":
+                String eventAt = currentLine.split(" \\| ")[3];
+                t[Task.getNoOfTask()] = new Events(taskDescription, eventAt);
+                if (isTaskDone.equals("1")) {
+                    t[Task.getNoOfTask()-1].taskDone();
+                }
+                break;
+            default:
+                System.out.println("Undefined task type - should not happen");
+                break;
+            }
+        }
+    }
+    private static void saveTaskList(Task[] t, String dataListFilePath) throws IOException {
+        FileWriter fw = new FileWriter(dataListFilePath);
+        //for (Task task : t)
+        for (int i = 0; i < Task.getNoOfTask(); i++) {
+            String taskDescription = t[i].getTaskDescription();
+            String taskType = t[i].getTaskType();
+            String isTaskDone;
+            if (t[i].getTaskStatus()) {
+                isTaskDone = "1";
+            } else {
+                isTaskDone = "0";
+            }
+            switch (taskType) {
+            case "ToDo":
+                fw.write("T | " + isTaskDone + " | " + taskDescription + System.lineSeparator());
+                break;
+            case "Deadline":
+                fw.write("D | " + isTaskDone + " | " + taskDescription + " | " + t[i].getTimeline() + System.lineSeparator());
+                break;
+            case "Events":
+                fw.write("E | " + isTaskDone + " | " + taskDescription + " | " + t[i].getTimeline() + System.lineSeparator());
+                break;
+            default:
+                System.out.println("Undefined task type - should not happen");
+                break;
+            }
+        }
+        fw.close();
+    }
+
     public static void main(String[] args) {
         String greetings = "    ____________________________________________________________\n" +
                 "     Hello! I'm Duke\n" +
@@ -191,6 +287,7 @@ public class Duke {
         System.out.println(greetings);
 
         String output;
+        String dataFileLocation = loadExistingList(t);
         String currentInput = in.nextLine();
 
         while (!currentInput.equals("bye")) {
@@ -198,6 +295,11 @@ public class Duke {
                 displayTaskList();
             } else {
                 checkTask(currentInput);
+                try {
+                    saveTaskList(t, dataFileLocation);
+                } catch (IOException e) {
+                    System.out.println("IOException error has occurred");
+                }
             }
             currentInput = in.nextLine();
         }

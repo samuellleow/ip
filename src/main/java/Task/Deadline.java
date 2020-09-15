@@ -12,6 +12,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getTimeline() {
+        return this.by;
+    }
+
+    @Override
     public String getTaskType() {
         return this.taskType;
     }
