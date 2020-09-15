@@ -4,27 +4,28 @@ import Task.ToDo;
 import Task.Events;
 import Task.Task;
 import Task.DukeException;
+import java.util.ArrayList;
 
 public class Duke {
 
-    static Task[] t = new Task[100];
+    static ArrayList<Task> t = new ArrayList<>();
     static Scanner in = new Scanner(System.in);
 
     public static void displayTaskList() {
-        if (Task.getNoOfTask() == 0) {
+        if (t.size() == 0) {
             System.out.println("    ____________________________________________________________\n" +
                     "     Your list is empty!!\n" +
                     "    ____________________________________________________________\n");
         } else {
             System.out.println("    ____________________________________________________________\n" +
                     "     Here are the tasks in your list:");
-            for (int i = 0; i < Task.getNoOfTask(); i++) {
-                if (t[i].getTaskType().equals("Deadline")) {
-                    System.out.println("     " + (i + 1) + "." + t[i]);
-                } else if (t[i].getTaskType().equals("Events")) {
-                    System.out.println("     " + (i + 1) + "." + t[i]);
+            for (int i = 0; i < t.size(); i++) {
+                if (t.get(i).getTaskType().equals("Deadline")) {
+                    System.out.println("     " + (i + 1) + "." + t.get(i));
+                } else if (t.get(i).getTaskType().equals("Events")) {
+                    System.out.println("     " + (i + 1) + "." + t.get(i));
                 } else {
-                    System.out.println("     " + (i + 1) + "." + t[i]);
+                    System.out.println("     " + (i + 1) + "." + t.get(i));
                 }
             }
             System.out.println("    ____________________________________________________________\n");
@@ -32,24 +33,56 @@ public class Duke {
     }
 
     public static void taskMarkAsDone(String currentInput) {
-        String taskDoneDescription;
         int itemIndex = Integer.parseInt(currentInput.replaceAll("\\D+","")) - 1;
-        taskDoneDescription = t[itemIndex].getTaskDescription();
-        t[itemIndex].taskDone();
+        t.get(itemIndex).taskDone();
         System.out.println("    ____________________________________________________________\n" +
                 "     Nice! I've marked this task as done:\n" +
-                "       [✓] " + taskDoneDescription + "\n" +
+                "       " + t.get(itemIndex) + "\n" +
                 "    ____________________________________________________________\n");
+    }
+
+    public static void deleteTask(String currentInput) {
+        int itemIndex = Integer.parseInt(currentInput.replaceAll("\\D+","")) - 1;
+        System.out.println("    ____________________________________________________________\n" +
+                "     Noted. I've removed this task:\n" +
+                "       " + t.get(itemIndex) + "\n" +
+                "     Now you have " + (t.size()-1) + " tasks in the list.\n" +
+                "    ____________________________________________________________\n");
+        t.remove(itemIndex);
+
     }
 
     public static void errorCheckingTaskDone(String currentInput) {
         try {
             taskMarkAsDone(currentInput);
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException | NullPointerException e) {
-            System.out.println("    ____________________________________________________________\n" +
-                    "     Please input a valid task number!!\n" +
-                    "    ____________________________________________________________\n");
+        } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
+            if (t.size() == 0) {
+                System.out.println("    ____________________________________________________________\n" +
+                        "     Your list is empty!!\n" +
+                        "    ____________________________________________________________\n");
+            } else {
+                System.out.println("    ____________________________________________________________\n" +
+                        "     Please input a valid task number!!\n" +
+                        "    ____________________________________________________________\n");
+            }
         }
+    }
+
+    public static void errorCheckingDelete(String currentInput) {
+        try {
+            deleteTask(currentInput);
+        } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
+            if (t.size() == 0) {
+                System.out.println("    ____________________________________________________________\n" +
+                        "     Your list is empty!!\n" +
+                        "    ____________________________________________________________\n");
+            } else {
+                System.out.println("    ____________________________________________________________\n" +
+                        "     Please input a valid task number!!\n" +
+                        "    ____________________________________________________________\n");
+            }
+        }
+
     }
 
     public static void checkTask(String currentInput) {
@@ -75,6 +108,9 @@ public class Duke {
             break;
         case "done":
             errorCheckingTaskDone(currentInput);
+            break;
+        case "delete":
+            errorCheckingDelete(currentInput);
             break;
         default:
             invalidTaskInput();
@@ -104,12 +140,15 @@ public class Duke {
         }
     }
 
+
+
     public static void createDeadlineTask(String currentInput, String taskDescription) throws DukeException {
         if (!currentInput.contains("/by")) {
             throw new DukeException();
         }
         String deadlineBy = currentInput.split("/by ")[1];
-        t[Task.getNoOfTask()] = new Deadline(taskDescription, deadlineBy);
+        Task newDeadlineTask = new Deadline(taskDescription, deadlineBy);
+        t.add(newDeadlineTask);
         addedTaskMessage();
     }
 
@@ -118,20 +157,22 @@ public class Duke {
             throw new DukeException();
         }
         String eventAt = currentInput.split("/at ")[1];
-        t[Task.getNoOfTask()] = new Events(taskDescription, eventAt);
+        Task newEventTask = new Events(taskDescription, eventAt);
+        t.add(newEventTask);
         addedTaskMessage();
     }
 
     public static void createTodoTask(String taskDescription) {
-        t[Task.getNoOfTask()] = new ToDo(taskDescription);
+        Task newToDoTask = new ToDo(taskDescription);
+        t.add(newToDoTask);
         addedTaskMessage();
     }
 
     public static void addedTaskMessage() {
         System.out.println("    ____________________________________________________________\n" +
                 "     Got it. I've added this task:\n" +
-                "       " + t[Task.getNoOfTask()-1] + "\n" +
-                "     Now you have " + (Task.getNoOfTask()) + " tasks in the list.\n" +
+                "       " + t.get(t.size()-1) + "\n" +
+                "     Now you have " + t.size() + " tasks in the list.\n" +
                 "    ____________________________________________________________\n");
     }
 
