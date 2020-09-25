@@ -1,13 +1,15 @@
-import Task.Task;
-import Task.ToDo;
-import Task.Deadline;
-import Task.Events;
+package Duke.Storage;
+
+import Duke.Task.Task;
+import Duke.Task.ToDo;
+import Duke.Task.Deadline;
+import Duke.Task.Events;
+import Duke.TaskList.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
@@ -16,6 +18,12 @@ public class Storage {
     private static final String FILE_DIRECTORY = "data/";
     private static final String FILE_PATH = "data/tasks.txt";
 
+    /**
+     * Checks if specified directory, else creates a new directory.
+     * Checks if specified data file exists, else creates a new date file.
+     *
+     * @param filePath Path of the data file that stores existing tasks
+     */
     public Storage(String filePath) {
         checkSpecificFolderExist();
         try {
@@ -40,6 +48,11 @@ public class Storage {
         return dataListFile;
     }
 
+    /**
+     * Loads existing tasks in the data file into a TaskList object.
+     *
+     * @param tasks TaskList object that stores existing tasks loaded from data file
+     */
     public void loadDataList(TaskList tasks) {
         try {
             File dataListFile = checkFileExists(FILE_PATH);
@@ -90,6 +103,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves all existing tasks into the data file.
+     *
+     * @param tasks TaskList object that stores existing tasks
+     * @param filePath Path of the data file that stores existing tasks
+     * @throws IOException If the data file does not exist
+     */
     public void saveTaskList(TaskList tasks, String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < tasks.getTaskList().size(); i++) {

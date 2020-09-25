@@ -1,3 +1,12 @@
+package Duke.Parser;
+
+import Duke.Commands.Command;
+import Duke.Commands.AddCommand;
+import Duke.Commands.DeleteCommand;
+import Duke.Commands.DoneCommand;
+import Duke.Commands.ExitCommand;
+import Duke.Commands.ListCommand;
+
 public class Parser {
     private static final String INPUT_COMMAND_DEADLINE = "deadline";
     private static final String INPUT_COMMAND_EVENT = "event";
@@ -7,6 +16,12 @@ public class Parser {
     private static final String INPUT_COMMAND_DELETE = "delete";
     private static final String INPUT_COMMAND_BYE = "bye";
 
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param inputCommand Full user input command string
+     * @return Command object corresponding to the input command of the user
+     */
     public static Command parse(String inputCommand) {
         Command commandType = null;
         if (inputCommand.equals(INPUT_COMMAND_BYE)) {
@@ -19,6 +34,12 @@ public class Parser {
         return commandType;
     }
 
+    /**
+     * Parses user input related to tasks into command for execution.
+     *
+     * @param inputCommand Full user input command string
+     * @return Command object corresponding to the input command of the user
+     */
     public static Command checkTask(String inputCommand) {
         Command commandType = null;
         String taskType = inputCommand.split(" ")[0];

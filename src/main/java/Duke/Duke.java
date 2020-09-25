@@ -1,5 +1,16 @@
+package Duke;
+
+import Duke.Storage.Storage;
+import Duke.TaskList.TaskList;
+import Duke.Ui.Ui;
+import Duke.Commands.Command;
+import Duke.Parser.Parser;
+
 import java.io.IOException;
 
+/**
+ * Entry point of the Duke application.
+ */
 public class Duke {
 
     private Storage storage;
@@ -8,6 +19,12 @@ public class Duke {
 
     private static final String FILE_PATH = "data/tasks.txt";
 
+    /**
+     * Initializes the application.
+     * Sets up the required objects.
+     *
+     * @param filePath Path of the data file that stores existing tasks
+     */
     public Duke(String filePath) {
         ui = new Ui();
         tasks = new TaskList();
@@ -15,6 +32,12 @@ public class Duke {
         storage.loadDataList(tasks);
     }
 
+    /**
+     * Prints welcome message.
+     * Loads existing tasks from the data file.
+     * Starts the interaction with the user.
+     * Runs the program until termination by the user.
+     */
     public void run() {
         ui.printStartDukeMessage();
         boolean isExit = false;

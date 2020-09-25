@@ -1,3 +1,12 @@
+package Duke.Commands;
+
+import Duke.Ui.Ui;
+import Duke.TaskList.TaskList;
+import Duke.Storage.Storage;
+
+/**
+ * Marks a task as done.
+ */
 public class DoneCommand extends Command {
     private String currentInput;
 
