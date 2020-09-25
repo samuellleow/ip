@@ -1,3 +1,5 @@
 T | 1 | drink water
 E | 1 | water plants | 12/03/2021
 D | 0 | cs2113 project | 02/10/20202
+D | 0 | return book | June 6th
+T | 1 | read book
