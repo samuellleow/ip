@@ -2,6 +2,7 @@ package Duke.Parser;
 
 import Duke.Commands.Command;
 import Duke.Commands.AddCommand;
+import Duke.Commands.DateTimeCommand;
 import Duke.Commands.DeleteCommand;
 import Duke.Commands.DoneCommand;
 import Duke.Commands.ExitCommand;
@@ -15,6 +16,7 @@ public class Parser {
     private static final String INPUT_COMMAND_DONE = "done";
     private static final String INPUT_COMMAND_DELETE = "delete";
     private static final String INPUT_COMMAND_BYE = "bye";
+    private static final String INPUT_COMMAND_DATETIME = "datetime";
 
     /**
      * Parses user input into command for execution.
@@ -65,6 +67,8 @@ public class Parser {
         case INPUT_COMMAND_DELETE:
             commandType = new DeleteCommand(inputCommand);
             break;
+        case INPUT_COMMAND_DATETIME:
+            commandType = new DateTimeCommand(inputCommand);
         }
         return commandType;
     }

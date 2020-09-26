@@ -7,7 +7,9 @@ import Duke.Task.Events;
 import Duke.Task.DukeException;
 import Duke.Ui.Ui;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
 
 public class TaskList {
 
@@ -62,6 +64,7 @@ public class TaskList {
             throw new DukeException();
         }
         String deadlineBy = currentInput.split("/by ")[1];
+        deadlineBy = checkDateTime(deadlineBy);
         Task newDeadlineTask = new Deadline(taskDescription, deadlineBy);
         tasks.getTaskList().add(newDeadlineTask);
         Ui.printAddTaskMessage(tasks);
@@ -88,6 +91,7 @@ public class TaskList {
             throw new DukeException();
         }
         String eventAt = currentInput.split("/at ")[1];
+        eventAt = checkDateTime(eventAt);
         Task newEventTask = new Events(taskDescription, eventAt);
         tasks.getTaskList().add(newEventTask);
         Ui.printAddTaskMessage(tasks);
@@ -142,4 +146,34 @@ public class TaskList {
         tasks.getTaskList().get(itemIndex).taskDone();
         Ui.printDoneTaskMessage(itemIndex, tasks);
     }
+
+    public static String checkDateTime(String dateTimeDetails) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(dateTimeDetails);
+            dateTimeDetails = dateTime.format(formatter);
+        } catch (java.time.format.DateTimeParseException e) {
+            Ui.printInvalidDateTimeErrorMessage();
+        }
+        return dateTimeDetails;
+    }
+
+    public static void errorCheckingDateTime(String currentInput, TaskList tasks) {
+        try {
+            taskDateTime(currentInput, tasks);
+        } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
+            if (tasks.getTaskList().size() == 0) {
+                Ui.printEmptyListErrorMessage();
+            } else {
+                Ui.printInvalidTaskNumberErrorMessage();
+            }
+        }
+    }
+
+    public static void taskDateTime(String currentInput, TaskList tasks) {
+        int itemIndex = Integer.parseInt(currentInput.replaceAll("\\D+","")) - 1;
+        tasks.getTaskList().get(itemIndex).getTimeline();
+        Ui.printDateTimeMessage(itemIndex, tasks);
+    }
+
 }
