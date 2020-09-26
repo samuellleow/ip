@@ -18,6 +18,8 @@ public class Ui {
 
     private static final String MESSAGE_TASK_LIST = "     Here are the tasks in your list:";
 
+    private static final String MESSAGE_DATE_TIME = "     This deadline/event is by/at ";
+
     private static final String ERROR_MESSAGE_EMPTY_LIST = "     Your list is empty!!";
 
     private static final String ERROR_MESSAGE_INVALID_TASK_NO = "     Please input a valid task number!!";
@@ -25,10 +27,15 @@ public class Ui {
     private static final String ERROR_MESSAGE_INVALID_TASK_INPUT = "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     private static final String ERROR_MESSAGE_INVALID_DEADLINE = "     Please enter deadline of task:)\n" +
-            "     For example: deadline (task description) /by (task deadline)";
+            "     For example: deadline (task description) /by (yyyy-MM-dd HH:mm)";
 
     private static final String ERROR_MESSAGE_INVALID_EVENT = "     Please enter date of event:)\n" +
-            "     For example: event (task description) /at (date of event)";
+            "     For example: event (task description) /at (yyyy-MM-dd HH:mm)";
+
+    private static final String ERROR_MESSAGE_INVALID_DATE_TIME = "     Please use the correct date and time format:)\n" +
+            "     /by (yyyy-MM-dd)T(HH:mm) OR\n" +
+            "     /at (yyyy-MM-dd)T(HH:mm)";
+
 
 
     public Scanner in;
@@ -81,6 +88,13 @@ public class Ui {
         System.out.println(MESSAGE_SINGLE_LINE);
     }
 
+    public static void printDateTimeMessage(int itemIndex, TaskList tasks) {
+        System.out.println(MESSAGE_SINGLE_LINE);
+        System.out.println(MESSAGE_DATE_TIME);
+        System.out.println("       " + tasks.getTaskList().get(itemIndex).getTimeline());
+        System.out.println(MESSAGE_SINGLE_LINE);
+    }
+
     public static void printListMessage(TaskList tasks) {
         if (tasks.getTaskList().size() == 0) {
             Ui.printEmptyListErrorMessage();
@@ -127,6 +141,12 @@ public class Ui {
     public static void printInvalidEventErrorMessage() {
         System.out.println(MESSAGE_SINGLE_LINE);
         System.out.println(ERROR_MESSAGE_INVALID_EVENT);
+        System.out.println(MESSAGE_SINGLE_LINE);
+    }
+
+    public static void printInvalidDateTimeErrorMessage() {
+        System.out.println(MESSAGE_SINGLE_LINE);
+        System.out.println(ERROR_MESSAGE_INVALID_DATE_TIME);
         System.out.println(MESSAGE_SINGLE_LINE);
     }
 
