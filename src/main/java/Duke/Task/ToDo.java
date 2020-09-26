@@ -1,5 +1,8 @@
-package Task;
+package Duke.Task;
 
+/**
+ * Represents a Todo task.
+ */
 public class ToDo extends Task {
 
     protected String taskType;

@@ -1,6 +1,11 @@
-import java.util.Scanner;
-import Task.Task;
+package Duke.Ui;
 
+import java.util.Scanner;
+import Duke.TaskList.TaskList;
+
+/**
+ * Text UI of the application.
+ */
 public class Ui {
 
     private static final String MESSAGE_GREETINGS = "     Hello! I'm Duke\n" +
@@ -44,39 +49,58 @@ public class Ui {
 
     public Scanner in;
 
+    /**
+     * Reads user's input command.
+     */
     public Ui() {
         in = new Scanner(System.in);
     }
 
+    /**
+     * Prints welcome message upon the start of the application.
+     */
     public void printStartDukeMessage() {
         System.out.println(MESSAGE_SINGLE_LINE);
         System.out.println(MESSAGE_GREETINGS);
         System.out.println(MESSAGE_SINGLE_LINE);
     }
 
+    /**
+     * Prints goodbye message upon termination of the application.
+     */
     public static void printGoodbyeMessage() {
         System.out.println(MESSAGE_SINGLE_LINE);
         System.out.println(MESSAGE_GOODBYE);
         System.out.println(MESSAGE_SINGLE_LINE);
     }
 
+    /**
+     * Prints description of the added task.
+     *
+     * @param tasks TaskList object that stores existing tasks
+     */
     public static void printAddTaskMessage(TaskList tasks) {
         System.out.println(MESSAGE_SINGLE_LINE);
         System.out.println(MESSAGE_ADD_TASK);
-        //POTENTIAL PROBLEM//
         System.out.println("       " + tasks.getTaskList().get(tasks.getTaskList().size()-1));
         printNoOfTaskForAddingFunction(tasks);
         System.out.println(MESSAGE_SINGLE_LINE);
     }
 
-    public static void printNoOfTaskForAddingFunction(TaskList tasks) {
+    private static void printNoOfTaskForAddingFunction(TaskList tasks) {
         System.out.println("     Now you have " + tasks.getTaskList().size() + " tasks in the list.");
     }
 
-    public static void printNoOfTaskForDeleteFunction(TaskList tasks) {
+    private static void printNoOfTaskForDeleteFunction(TaskList tasks) {
         System.out.println("     Now you have " + (tasks.getTaskList().size() - 1) + " tasks in the list.");
     }
 
+    /**
+     * Prints description of the task that is marked as done.
+     *
+     * @param itemIndex Index of the task to be marked as done
+     * @param tasks TaskList object that stores existing tasks
+     */
     public static void printDoneTaskMessage(int itemIndex, TaskList tasks) {
         System.out.println(MESSAGE_SINGLE_LINE);
         System.out.println(MESSAGE_DONE_TASK);
@@ -84,6 +108,12 @@ public class Ui {
         System.out.println(MESSAGE_SINGLE_LINE);
     }
 
+    /**
+     * Prints description of the task that is deleted.
+     *
+     * @param itemIndex Index of the task to be deleted
+     * @param tasks TaskList object that stores existing tasks
+     */
     public static void printDeleteTaskMessage(int itemIndex, TaskList tasks) {
         System.out.println(MESSAGE_SINGLE_LINE);
         System.out.println(MESSAGE_REMOVE_TASK);
@@ -92,6 +122,12 @@ public class Ui {
         System.out.println(MESSAGE_SINGLE_LINE);
     }
 
+    /**
+     * Prints date and time of the task
+     *
+     * @param itemIndex Index of the task to be deleted
+     * @param tasks askList object that stores existing tasks
+     */
     public static void printDateTimeMessage(int itemIndex, TaskList tasks) {
         System.out.println(MESSAGE_SINGLE_LINE);
         System.out.println(MESSAGE_DATE_TIME);
@@ -99,6 +135,11 @@ public class Ui {
         System.out.println(MESSAGE_SINGLE_LINE);
     }
 
+    /**
+     * Prints the list of existing tasks in the Arraylist.
+     *
+     * @param tasks TaskList object that stores existing tasks
+     */
     public static void printListMessage(TaskList tasks) {
         if (tasks.getTaskList().size() == 0) {
             printEmptyListErrorMessage();
@@ -118,6 +159,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Finds the task(s) corresponding to the keyword the user has input
+     *
+     * @param tasks TaskList object that stores existing tasks
+     * @param keyword Keyword used to find a task
+     */
     public static void findTask(TaskList tasks, String keyword) {
         Boolean foundTaskWithKeyword = false;
         int taskIndex = 0;
@@ -142,30 +189,45 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints error message if the Arraylist is empty.
+     */
     public static void printEmptyListErrorMessage() {
         System.out.println(MESSAGE_SINGLE_LINE);
         System.out.println(ERROR_MESSAGE_EMPTY_LIST);
         System.out.println(MESSAGE_SINGLE_LINE);
     }
 
+    /**
+     * Prints error message when user provides invalid task number.
+     */
     public static void printInvalidTaskNumberErrorMessage() {
         System.out.println(MESSAGE_SINGLE_LINE);
         System.out.println(ERROR_MESSAGE_INVALID_TASK_NO);
         System.out.println(MESSAGE_SINGLE_LINE);
     }
 
+    /**
+     * Prints error message when user provides invalid input command.
+     */
     public void printInvalidTaskInputErrorMessage() {
         System.out.println(MESSAGE_SINGLE_LINE);
         System.out.println(ERROR_MESSAGE_INVALID_TASK_INPUT);
         System.out.println(MESSAGE_SINGLE_LINE);
     }
 
+    /**
+     * Prints error message when user provides invalid Deadline task
+     */
     public static void printInvalidDeadlineErrorMessage() {
         System.out.println(MESSAGE_SINGLE_LINE);
         System.out.println(ERROR_MESSAGE_INVALID_DEADLINE);
         System.out.println(MESSAGE_SINGLE_LINE);
     }
 
+    /**
+     * Prints error message when user provides invalid Event task
+     */
     public static void printInvalidEventErrorMessage() {
         System.out.println(MESSAGE_SINGLE_LINE);
         System.out.println(ERROR_MESSAGE_INVALID_EVENT);

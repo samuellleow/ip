@@ -1,5 +1,8 @@
-package Task;
+package Duke.Task;
 
+/**
+ * Represents a Deadline task.
+ */
 public class Deadline extends Task {
 
     protected String by;
