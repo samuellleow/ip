@@ -71,8 +71,10 @@ public class Parser {
             break;
         case INPUT_COMMAND_FIND:
             commandType = new FindCommand(inputCommand);
+            break;
         case INPUT_COMMAND_DATETIME:
             commandType = new DateTimeCommand(inputCommand);
+            break;
         }
         return commandType;
     }

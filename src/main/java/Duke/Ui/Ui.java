@@ -1,6 +1,7 @@
 package Duke.Ui;
 
 import java.util.Scanner;
+import Duke.Task.Task;
 import Duke.TaskList.TaskList;
 
 /**
@@ -36,10 +37,10 @@ public class Ui {
     private static final String ERROR_MESSAGE_INVALID_TASK_INPUT = "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     private static final String ERROR_MESSAGE_INVALID_DEADLINE = "     Please enter deadline of task:)\n" +
-            "     For example: deadline (task description) /by (yyyy-MM-dd HH:mm)";
+            "     For example: deadline (task description) /by (yyyy-MM-dd)T(HH:mm)";
 
     private static final String ERROR_MESSAGE_INVALID_EVENT = "     Please enter date of event:)\n" +
-            "     For example: event (task description) /at (yyyy-MM-dd HH:mm)";
+            "     For example: event (task description) /at (yyyy-MM-dd)T(HH:mm)";
 
     private static final String ERROR_MESSAGE_INVALID_DATE_TIME = "     Please use the correct date and time format:)\n" +
             "     /by (yyyy-MM-dd)T(HH:mm) OR\n" +
@@ -83,17 +84,17 @@ public class Ui {
         System.out.println(MESSAGE_SINGLE_LINE);
         System.out.println(MESSAGE_ADD_TASK);
         System.out.println("       " + tasks.getTaskList().get(tasks.getTaskList().size()-1));
-        printNoOfTaskForAddingFunction(tasks);
+        printNoOfTask(tasks);
         System.out.println(MESSAGE_SINGLE_LINE);
     }
 
-    private static void printNoOfTaskForAddingFunction(TaskList tasks) {
+    private static void printNoOfTask(TaskList tasks) {
         System.out.println("     Now you have " + tasks.getTaskList().size() + " tasks in the list.");
     }
 
-    private static void printNoOfTaskForDeleteFunction(TaskList tasks) {
-        System.out.println("     Now you have " + (tasks.getTaskList().size() - 1) + " tasks in the list.");
-    }
+//    private static void printNoOfTaskForDeleteFunction(TaskList tasks) {
+//        System.out.println("     Now you have " + (tasks.getTaskList().size() - 1) + " tasks in the list.");
+//    }
 
     /**
      * Prints description of the task that is marked as done.
@@ -111,14 +112,14 @@ public class Ui {
     /**
      * Prints description of the task that is deleted.
      *
-     * @param itemIndex Index of the task to be deleted
+     * @param taskToBeDeleted Task to be deleted
      * @param tasks TaskList object that stores existing tasks
      */
-    public static void printDeleteTaskMessage(int itemIndex, TaskList tasks) {
+    public static void printDeleteTaskMessage(Task taskToBeDeleted, TaskList tasks) {
         System.out.println(MESSAGE_SINGLE_LINE);
         System.out.println(MESSAGE_REMOVE_TASK);
-        System.out.println("       " + tasks.getTaskList().get(itemIndex));
-        printNoOfTaskForDeleteFunction(tasks);
+        System.out.println("       " + taskToBeDeleted);
+        printNoOfTask(tasks);
         System.out.println(MESSAGE_SINGLE_LINE);
     }
 

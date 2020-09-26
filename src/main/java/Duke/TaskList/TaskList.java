@@ -118,8 +118,9 @@ public class TaskList {
 
     private static void deleteTask(String currentInput, TaskList tasks) {
         int itemIndex = Integer.parseInt(currentInput.replaceAll("\\D+","")) - 1;
-        Ui.printDeleteTaskMessage(itemIndex, tasks);
+        Task taskToBeDeleted = tasks.getTaskList().get(itemIndex);
         tasks.getTaskList().remove(itemIndex);
+        Ui.printDeleteTaskMessage(taskToBeDeleted, tasks);
     }
 
     /**
