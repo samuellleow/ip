@@ -6,6 +6,7 @@ public class Parser {
     private static final String INPUT_COMMAND_DONE = "done";
     private static final String INPUT_COMMAND_DELETE = "delete";
     private static final String INPUT_COMMAND_BYE = "bye";
+    private static final String INPUT_COMMAND_DATETIME = "datetime";
 
     public static Command parse(String inputCommand) {
         Command commandType = null;
@@ -44,6 +45,8 @@ public class Parser {
         case INPUT_COMMAND_DELETE:
             commandType = new DeleteCommand(inputCommand);
             break;
+        case INPUT_COMMAND_DATETIME:
+            commandType = new DateTimeCommand(inputCommand);
         }
         return commandType;
     }
