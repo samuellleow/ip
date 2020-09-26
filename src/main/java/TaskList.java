@@ -128,5 +128,4 @@ public class TaskList {
         tasks.getTaskList().get(itemIndex).getTimeline();
         Ui.printDateTimeMessage(itemIndex, tasks);
     }
-
 }
