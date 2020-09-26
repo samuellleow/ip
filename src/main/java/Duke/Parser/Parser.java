@@ -6,6 +6,7 @@ import Duke.Commands.DateTimeCommand;
 import Duke.Commands.DeleteCommand;
 import Duke.Commands.DoneCommand;
 import Duke.Commands.ExitCommand;
+import Duke.Commands.FindCommand;
 import Duke.Commands.ListCommand;
 
 public class Parser {
@@ -16,6 +17,7 @@ public class Parser {
     private static final String INPUT_COMMAND_DONE = "done";
     private static final String INPUT_COMMAND_DELETE = "delete";
     private static final String INPUT_COMMAND_BYE = "bye";
+    private static final String INPUT_COMMAND_FIND = "find";
     private static final String INPUT_COMMAND_DATETIME = "datetime";
 
     /**
@@ -67,6 +69,8 @@ public class Parser {
         case INPUT_COMMAND_DELETE:
             commandType = new DeleteCommand(inputCommand);
             break;
+        case INPUT_COMMAND_FIND:
+            commandType = new FindCommand(inputCommand);
         case INPUT_COMMAND_DATETIME:
             commandType = new DateTimeCommand(inputCommand);
         }

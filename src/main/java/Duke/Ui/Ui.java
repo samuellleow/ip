@@ -23,6 +23,10 @@ public class Ui {
 
     private static final String MESSAGE_TASK_LIST = "     Here are the tasks in your list:";
 
+    private static final String MESSAGE_FIND_TASK = "     Here are the matching tasks in your list:";
+
+    private static final String ERROR_MESSAGE_INVALID_FIND_TASK = "     There are no task(s) that match your keyword!!";
+
     private static final String MESSAGE_DATE_TIME = "     This deadline/event is by/at ";
 
     private static final String ERROR_MESSAGE_EMPTY_LIST = "     Your list is empty!!";
@@ -138,7 +142,7 @@ public class Ui {
      */
     public static void printListMessage(TaskList tasks) {
         if (tasks.getTaskList().size() == 0) {
-            Ui.printEmptyListErrorMessage();
+            printEmptyListErrorMessage();
         } else {
             System.out.println(MESSAGE_SINGLE_LINE);
             System.out.println(MESSAGE_TASK_LIST);
@@ -150,6 +154,36 @@ public class Ui {
                 } else {
                     System.out.println("     " + (i + 1) + "." + tasks.getTaskList().get(i));
                 }
+            }
+            System.out.println(MESSAGE_SINGLE_LINE);
+        }
+    }
+
+    /**
+     * Finds the task(s) corresponding to the keyword the user has input
+     *
+     * @param tasks TaskList object that stores existing tasks
+     * @param keyword Keyword used to find a task
+     */
+    public static void findTask(TaskList tasks, String keyword) {
+        Boolean foundTaskWithKeyword = false;
+        int taskIndex = 0;
+        if (tasks.getTaskList().size() == 0) {
+            printEmptyListErrorMessage();
+        } else {
+            System.out.println(MESSAGE_SINGLE_LINE);
+            for (int i = 0; i < tasks.getTaskList().size(); i++) {
+                if (tasks.getTaskList().get(i).getTaskDescription().contains(keyword)) {
+                    if(!foundTaskWithKeyword) {
+                        System.out.println(MESSAGE_FIND_TASK);
+                    }
+                    System.out.println("     " + (taskIndex + 1) + "." + tasks.getTaskList().get(i));
+                    foundTaskWithKeyword = true;
+                    taskIndex++;
+                }
+            }
+            if (!foundTaskWithKeyword) {
+                System.out.println(ERROR_MESSAGE_INVALID_FIND_TASK);
             }
             System.out.println(MESSAGE_SINGLE_LINE);
         }
