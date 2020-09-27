@@ -42,9 +42,10 @@ public class Ui {
     private static final String ERROR_MESSAGE_INVALID_EVENT = "     Please enter date of event:)\n" +
             "     For example: event (task description) /at (yyyy-MM-dd)T(HH:mm)";
 
-    private static final String ERROR_MESSAGE_INVALID_DATE_TIME = "     Please use the correct date and time format:)\n" +
+    private static final String ERROR_MESSAGE_INVALID_DATE_TIME = "     Hello! You may want to use the correct date and time format:)\n" +
             "     /by (yyyy-MM-dd)T(HH:mm) OR\n" +
-            "     /at (yyyy-MM-dd)T(HH:mm)";
+            "     /at (yyyy-MM-dd)T(HH:mm)\n" +
+            "     But no worries, I have added your task into the list:)";
 
 
 
@@ -238,7 +239,6 @@ public class Ui {
     public static void printInvalidDateTimeErrorMessage() {
         System.out.println(MESSAGE_SINGLE_LINE);
         System.out.println(ERROR_MESSAGE_INVALID_DATE_TIME);
-        System.out.println(MESSAGE_SINGLE_LINE);
     }
 
 }

@@ -47,7 +47,7 @@ public class Duke {
             commandInput.executeCommand(tasks, ui, storage);
             storage.saveTaskList(tasks, FILE_PATH);
             isExit = commandInput.isExit();
-            } catch (NullPointerException | StringIndexOutOfBoundsException | IOException e) {
+            } catch (NullPointerException | StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException| IOException e) {
                 ui.printInvalidTaskInputErrorMessage();
             }
         }
