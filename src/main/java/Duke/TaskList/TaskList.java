@@ -32,20 +32,30 @@ public class TaskList {
     }
 
     /**
-     * Creates and adds a new Todo task into the arraylist.
+     * Checks if user added task description.
+     * Creates and adds a new Todo task into the arraylist if no error is found.
      *
-     * @param taskDescription Description of Todo task
+     * @param currentInput Full user's input
      * @param tasks Arraylist that stores existing tasks
      */
-    public static void createTodoTask(String taskDescription, TaskList tasks) {
+    public static void errorCheckingTodo(String currentInput, TaskList tasks) {
+        try {
+            createTodoTask(currentInput, tasks);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            Ui.printInvalidTodoErrorMessage();
+        }
+    }
+
+    private static void createTodoTask(String currentInput, TaskList tasks) {
+        String taskDescription = currentInput.split(" ")[1];
         Task newToDoTask = new ToDo(taskDescription);
         tasks.getTaskList().add(newToDoTask);
         Ui.printAddTaskMessage(tasks);
     }
 
     /**
-     * Checks for formatting error in user's input on adding Deadline task
-     * Creates and adds a new Deadline task into the arraylist if no error is found
+     * Checks for formatting error in user's input on adding Deadline task.
+     * Creates and adds a new Deadline task into the arraylist if no error is found.
      *
      * @param currentInput Full user's input
      * @param taskDescription Description of Deadline task
@@ -71,8 +81,8 @@ public class TaskList {
     }
 
     /**
-     * Checks for formatting error in user's input on adding Event task
-     * Creates and adds a new Event task into the arraylist if no error is found
+     * Checks for formatting error in user's input on adding Event task.
+     * Creates and adds a new Event task into the arraylist if no error is found.
      *
      * @param currentInput Full user's input
      * @param taskDescription Description of Event task
@@ -98,8 +108,8 @@ public class TaskList {
     }
 
     /**
-     * Checks for indexing error in user's input on deleting task
-     * Deletes the task corresponding to the user's index input
+     * Checks for indexing error in user's input on deleting task.
+     * Deletes the task corresponding to the user's index input if no error is found.
      *
      * @param currentInput Full user's input
      * @param tasks Arraylist that stores existing tasks
@@ -124,8 +134,8 @@ public class TaskList {
     }
 
     /**
-     * Checks for indexing error in user's input on marking task as done
-     * Sets the task as done corresponding to the user's index input
+     * Checks for indexing error in user's input on marking task as done.
+     * Sets the task as done corresponding to the user's index input if no error is found.
      *
      * @param currentInput Full user's input
      * @param tasks Arraylist that stores existing tasks
@@ -148,6 +158,13 @@ public class TaskList {
         Ui.printDoneTaskMessage(itemIndex, tasks);
     }
 
+    /**
+     * Checks for formatting error in user's input on date and time input.
+     * Returns the date and time details in <MMM d yyyy HH:mm> format if no error is found.
+     *
+     * @param dateTimeDetails Details of date and/or time of Deadline or Event task
+     * @return Details of date and/or time
+     */
     public static String checkDateTime(String dateTimeDetails) {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
@@ -159,6 +176,13 @@ public class TaskList {
         return dateTimeDetails;
     }
 
+    /**
+     * Checks for indexing error in user's input on checking date and time of task.
+     * Returns the date and time details corresponding to the user's index input if no error is found.
+     *
+     * @param currentInput Full user's input
+     * @param tasks Arraylist that stores existing tasks
+     */
     public static void errorCheckingDateTime(String currentInput, TaskList tasks) {
         try {
             taskDateTime(currentInput, tasks);
@@ -171,7 +195,7 @@ public class TaskList {
         }
     }
 
-    public static void taskDateTime(String currentInput, TaskList tasks) {
+    private static void taskDateTime(String currentInput, TaskList tasks) {
         int itemIndex = Integer.parseInt(currentInput.replaceAll("\\D+","")) - 1;
         tasks.getTaskList().get(itemIndex).getTimeline();
         Ui.printDateTimeMessage(itemIndex, tasks);

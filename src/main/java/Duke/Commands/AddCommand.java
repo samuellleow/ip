@@ -31,7 +31,7 @@ public class AddCommand extends Command {
     public void executeCommand(TaskList tasks, Ui ui, Storage storage) {
         switch(taskType) {
         case INPUT_COMMAND_TODO:
-            TaskList.createTodoTask(description, tasks);
+            TaskList.errorCheckingTodo(currentInput, tasks);
             break;
         case INPUT_COMMAND_DEADLINE:
             TaskList.errorCheckingDeadline(currentInput, description, tasks);

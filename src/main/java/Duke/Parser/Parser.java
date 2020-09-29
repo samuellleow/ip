@@ -27,7 +27,7 @@ public class Parser {
      * @return Command object corresponding to the input command of the user
      */
     public static Command parse(String inputCommand) {
-        Command commandType = null;
+        Command commandType;
         if (inputCommand.equals(INPUT_COMMAND_BYE)) {
             commandType = new ExitCommand();
         } else if (inputCommand.equals(INPUT_COMMAND_LIST)) {
@@ -49,7 +49,8 @@ public class Parser {
         String taskType = inputCommand.split(" ")[0];
         String taskDescription;
 
-        // Check user's input command - user might enter incorrect inputs which does not correspond to any of our function
+        // Check validity of user's input on task description
+        // If given correct command but invalid format, error messages can be printed
         if (inputCommand.split(" ").length > 1) {
             taskDescription = inputCommand.split(" /", 2)[0].split(" ", 2)[1];
         }

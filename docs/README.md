@@ -6,7 +6,7 @@ Duke is an application that helps the user with task scheduling and management.
 2. Copy the `ip.jar` file into an empty folder.
 3. Open a command window in that folder.
 4. Enter the following commands `chcp 65001` followed by setting the font to **NSimSun**.
-5. Run the command `java -Dfile.encoding=UTF-8 -jar ip.jar` to start the application.
+5. Run the command `java -Dfile.encoding=UTF-8 -jar ip.jar` in the jar folder to start the application.
 
 ## Main Features 
 * Create various types of tasks and adding into a list (E.g todo, deadline, event)

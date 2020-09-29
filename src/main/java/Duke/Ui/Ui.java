@@ -36,6 +36,9 @@ public class Ui {
 
     private static final String ERROR_MESSAGE_INVALID_TASK_INPUT = "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
+    private static final String ERROR_MESSAGE_INVALID_TODO = "     I'm sorry, but please tell me the task you need to do:)\n" +
+            "     For example: todo (task description)";
+
     private static final String ERROR_MESSAGE_INVALID_DEADLINE = "     Please enter deadline of task:)\n" +
             "     For example: deadline (task description) /by (yyyy-MM-dd)T(HH:mm)";
 
@@ -125,7 +128,7 @@ public class Ui {
     }
 
     /**
-     * Prints date and time of the task
+     * Prints date and time of the task.
      *
      * @param itemIndex Index of the task to be deleted
      * @param tasks askList object that stores existing tasks
@@ -162,7 +165,7 @@ public class Ui {
     }
 
     /**
-     * Finds the task(s) corresponding to the keyword the user has input
+     * Finds the task(s) corresponding to the keyword the user has input.
      *
      * @param tasks TaskList object that stores existing tasks
      * @param keyword Keyword used to find a task
@@ -219,7 +222,16 @@ public class Ui {
     }
 
     /**
-     * Prints error message when user provides invalid Deadline task
+     * Prints error message when user provides invalid Todo task.
+     */
+    public static void printInvalidTodoErrorMessage() {
+        System.out.println(MESSAGE_SINGLE_LINE);
+        System.out.println(ERROR_MESSAGE_INVALID_TODO);
+        System.out.println(MESSAGE_SINGLE_LINE);
+    }
+
+    /**
+     * Prints error message when user provides invalid Deadline task.
      */
     public static void printInvalidDeadlineErrorMessage() {
         System.out.println(MESSAGE_SINGLE_LINE);
@@ -228,7 +240,7 @@ public class Ui {
     }
 
     /**
-     * Prints error message when user provides invalid Event task
+     * Prints error message when user provides invalid Event task.
      */
     public static void printInvalidEventErrorMessage() {
         System.out.println(MESSAGE_SINGLE_LINE);
@@ -236,6 +248,9 @@ public class Ui {
         System.out.println(MESSAGE_SINGLE_LINE);
     }
 
+    /**
+     * Prints date and/or time of Deadline or Event task.
+     */
     public static void printInvalidDateTimeErrorMessage() {
         System.out.println(MESSAGE_SINGLE_LINE);
         System.out.println(ERROR_MESSAGE_INVALID_DATE_TIME);
