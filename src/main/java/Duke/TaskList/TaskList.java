@@ -127,7 +127,7 @@ public class TaskList {
     }
 
     private static void deleteTask(String currentInput, TaskList tasks) {
-        int itemIndex = Integer.parseInt(currentInput.replaceAll("\\D+","")) - 1;
+        int itemIndex = Integer.parseInt(currentInput.split(" ")[1]) - 1;
         Task taskToBeDeleted = tasks.getTaskList().get(itemIndex);
         tasks.getTaskList().remove(itemIndex);
         Ui.printDeleteTaskMessage(taskToBeDeleted, tasks);
@@ -153,7 +153,7 @@ public class TaskList {
     }
 
     private static void taskMarkAsDone(String currentInput, TaskList tasks) {
-        int itemIndex = Integer.parseInt(currentInput.replaceAll("\\D+","")) - 1;
+        int itemIndex = Integer.parseInt(currentInput.split(" ")[1]) - 1;
         tasks.getTaskList().get(itemIndex).taskDone();
         Ui.printDoneTaskMessage(itemIndex, tasks);
     }
@@ -196,7 +196,7 @@ public class TaskList {
     }
 
     private static void taskDateTime(String currentInput, TaskList tasks) {
-        int itemIndex = Integer.parseInt(currentInput.replaceAll("\\D+","")) - 1;
+        int itemIndex = Integer.parseInt(currentInput.split(" ")[1]) - 1;
         tasks.getTaskList().get(itemIndex).getTimeline();
         Ui.printDateTimeMessage(itemIndex, tasks);
     }

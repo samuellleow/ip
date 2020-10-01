@@ -2,8 +2,8 @@ T | 1 | drink water
 E | 1 | water plants | 12/03/2021
 D | 1 | return book | June 6th
 D | 1 | read book | Oct 11 2020 18:00
-T | 0 | read book
+T | 1 | read book
 D | 0 | cs2113 project | December 2020
 D | 0 | team project | Dec 31 2020 23:59
 E | 0 | project presentation | January 2021
-E | 0 | Grandma 99th birthday | Dec 31 2020 23:59
+E | 1 | Grandma 99th birthday | Dec 31 2020 23:59
